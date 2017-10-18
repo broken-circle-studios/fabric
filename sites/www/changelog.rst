@@ -2,6 +2,10 @@
 Changelog
 =========
 
+* :support:`- backported` Update packaging metadata so wheel archives include
+  the ``LICENSE`` file.
+* :support:`1539` Add documentation for :ref:`env.output_prefix
+  <output_prefix>`. Thanks ``@jphalip``.
 * :release:`1.14.0 <2017-08-25>`
 * :feature:`1475` Honor ``env.timeout`` when opening new remote sessions (as
   opposed to the initial overall connection, which already honored timeout
