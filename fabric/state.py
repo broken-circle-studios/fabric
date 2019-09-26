@@ -352,6 +352,7 @@ env = _AttributeDict({
     'gss_kex': None,
     'host': None,
     'host_string': None,
+    "interactive_prompts": False, # If enabled, remote output is parsed for prompts
     'lcwd': '',  # Must be empty string, not None, for concatenation purposes
     'local_user': _get_system_username(),
     'output_prefix': True,

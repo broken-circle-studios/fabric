@@ -165,19 +165,21 @@ class OutputLooper(object):
                 for fragment in read_lines:
                     # Store in capture buffer
                     self.capture += fragment
-                    # Handle prompts
-                    expected, response = self._get_prompt_response()
-                    if expected:
-                        del list(self.capture)[-1 * len(expected):]
-                        self.chan.sendall(str(response) + '\n')
-                    else:
-                        prompt = _endswith(self.capture, env.sudo_prompt)
-                        try_again = (_endswith(self.capture, env.again_prompt + '\n')
-                            or _endswith(self.capture, env.again_prompt + '\r\n'))
-                        if prompt:
-                            self.prompt()
-                        elif try_again:
-                            self.try_again()
+
+                    if env.interactive_prompts:
+                        # Handle prompts
+                        expected, response = self._get_prompt_response()
+                        if expected:
+                            del list(self.capture)[-1 * len(expected):]
+                            self.chan.sendall(str(response) + '\n')
+                        else:
+                            prompt = _endswith(self.capture, env.sudo_prompt)
+                            try_again = (_endswith(self.capture, env.again_prompt + '\n')
+                                or _endswith(self.capture, env.again_prompt + '\r\n'))
+                            if prompt:
+                                self.prompt()
+                            elif try_again:
+                                self.try_again()
 
         # Print trailing new line if the last thing we printed was our line
         # prefix.
